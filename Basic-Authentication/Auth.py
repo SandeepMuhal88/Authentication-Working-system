@@ -29,7 +29,7 @@ def create_access_token(data: dict):
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     # 1. Verification
     user_dict = fake_users_db.get(form_data.username)
-    if not user_dict or form_data.password != "password": # Simplified check
+    if not user_dict or form_data.password != "password": # In production, verify hashed password
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     
     # 2. Token Generation
